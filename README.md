@@ -12,7 +12,7 @@
 
 Gutenbergでの編集画面で「Gutenbergを使用する」のチェックを外した場合はページのリロードが必要になります。
 
-参考：https://capitalp.jp/2018/12/08/activate-classic-editor-by-post/
+機能実装に関する参考記事：https://capitalp.jp/2018/12/08/activate-classic-editor-by-post/
 
 ## 今後の予定
 * 一応自動アプデ機能をつけておきたい
