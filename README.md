@@ -12,6 +12,9 @@
 
 Gutenbergでの編集画面で「Gutenbergを使用する」のチェックを外した場合はページのリロードが必要になります。
 
+全記事Gutenberg対応が完了したらYS WP Gutenberg Switcherプラグインは停止＆削除して下さい。
+（合わせてClassic Editorプラグインも停止＆削除しましょう。）
+
 機能実装に関する参考記事：https://capitalp.jp/2018/12/08/activate-classic-editor-by-post/
 
 ## 今後の予定

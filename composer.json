@@ -1,0 +1,5 @@
+{
+    "require": {
+        "inc2734/wp-github-plugin-updater": "^1.0"
+    }
+}

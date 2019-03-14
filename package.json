@@ -1,9 +1,16 @@
-
 {
   "name": "ys-wp-gutenberg-switcher",
   "version": "0.1.0",
   "main": "",
   "author": "yosiakatsuki",
   "devDependencies": {
+    "rimraf": "^2.6.3"
+  },
+  "scripts": {
+    "zip:clean": "rimraf ys-wp-gutenberg-switcher.zip",
+    "zip:composer": "composer install --no-dev",
+    "zip:pack": "rsync -a --exclude='.*' --exclude='/*.json' --exclude='/*.lock' --exclude='*.xml.dist' --exclude='/bin' --exclude='/tests' --exclude='/node_modules' . ys-wp-gutenberg-switcher",
+    "zip:archive": "zip -9 -qmr ys-wp-gutenberg-switcher.zip ys-wp-gutenberg-switcher",
+    "zip":"npm run zip:clean && npm run zip:composer && npm run zip:pack && npm run zip:archive"
   }
 }

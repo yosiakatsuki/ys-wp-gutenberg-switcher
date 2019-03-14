@@ -12,14 +12,16 @@
  * @package         Ys_Wp_Gutenberg_Switcher
  */
 
+require_once( __DIR__ . '/vendor/autoload.php' );
+
 define( 'YSWPGS_PATH', plugin_dir_path( __FILE__ ) );
 define( 'YSWPGS_USE_BLOCK_META_KEY', '_yswpgs_use_block' );
 
 /**
  * Gutenbergを使用するか判断
  *
- * @param $use_block_editor
- * @param $post
+ * @param bool    $use_block_editor Gutenbergを使うか.
+ * @param WP_Post $post             投稿オブジェクト.
  *
  * @return bool
  */
@@ -69,16 +71,16 @@ function yswpgs_meta_box_html() {
 		$checked = '1';
 	}
 	?>
-	<label for="yswpgs_use_block">
-		<input type="checkbox" id="yswpgs_use_block" name="yswpgs_use_block" value="1" <?php checked( $checked, '1', true ); ?> />Gutenbergを使用する
-	</label>
+    <label for="yswpgs_use_block">
+        <input type="checkbox" id="yswpgs_use_block" name="yswpgs_use_block" value="1" <?php checked( $checked, '1', true ); ?> />Gutenbergを使用する
+    </label>
 	<?php
 }
 
 /**
  * 設定更新
  *
- * @param $post_id
+ * @param int $post_id Post ID.
  */
 function yswpgs_save_post( $post_id ) {
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
@@ -98,3 +100,17 @@ function yswpgs_save_post( $post_id ) {
 }
 
 add_action( 'save_post', 'yswpgs_save_post' );
+
+
+/**
+ * 自動アップデート
+ */
+function yswpgs_activate_autoupdate() {
+	$updater = new Inc2734\WP_GitHub_Plugin_Updater\Bootstrap(
+		plugin_basename( __FILE__ ),
+		'yosiakatsuki',
+		'ys-wp-gutenberg-switcher'
+	);
+}
+
+add_action( 'init', 'yswpgs_activate_autoupdate' );

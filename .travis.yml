@@ -1,65 +1,75 @@
 sudo: false
 dist: trusty
-
 language: php
-
 notifications:
   email:
     on_success: never
     on_failure: change
-
 branches:
   only:
-    - master
-
+  - master
+  - develop
 cache:
   directories:
-    - $HOME/.composer/cache
-
+  - "$HOME/.composer/cache"
+install:
+- nvm install 8
+- npm install
+- composer install
+env:
+  global:
+  - GIT_COMMITTER_NAME=travis-ci
+  - GIT_COMMITTER_EMAIL=info@yosiakatsuki.net
+  - GIT_AUTHOR_NAME=travis-ci
+  - GIT_AUTHOR_EMAIL=info@yosiakatsuki.net
 matrix:
   include:
-    - php: 7.1
-      env: WP_VERSION=latest
-    - php: 7.0
-      env: WP_VERSION=latest
-    - php: 5.6
-      env: WP_VERSION=4.4
-    - php: 5.6
-      env: WP_VERSION=latest
-    - php: 5.6
-      env: WP_VERSION=trunk
-    - php: 5.6
-      env: WP_TRAVISCI=phpcs
-    - php: 5.3
-      env: WP_VERSION=latest
-      dist: precise
-
+  - php: 7.2
+    env: WP_VERSION=latest
+  - php: 5.6
+    env: WP_VERSION=latest
+  - php: 5.6
+    env: WP_TRAVISCI=phpcs
 before_script:
-  - export PATH="$HOME/.composer/vendor/bin:$PATH"
-  - |
-    if [ -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ]; then
-      phpenv config-rm xdebug.ini
-    else
-      echo "xdebug.ini does not exist"
-    fi
-  - |
-    if [[ ! -z "$WP_VERSION" ]] ; then
-      bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
-      composer global require "phpunit/phpunit=4.8.*|5.7.*"
-    fi
-  - |
-    if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
-      composer global require wp-coding-standards/wpcs
-      phpcs --config-set installed_paths $HOME/.composer/vendor/wp-coding-standards/wpcs
-    fi
-
+- export PATH="$HOME/.composer/vendor/bin:$PATH"
+- bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
+- |
+  if [ -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ]; then
+    phpenv config-rm xdebug.ini
+  else
+    echo "xdebug.ini does not exist"
+  fi
+- |
+  if [[ ! -z "$WP_VERSION" ]] ; then
+    bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
+    composer global require "phpunit/phpunit=4.8.*|5.7.*"
+  fi
+- |
+  if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
+    composer global require wp-coding-standards/wpcs
+    phpcs --config-set installed_paths $HOME/.composer/vendor/wp-coding-standards/wpcs
+  fi
 script:
-  - |
-    if [[ ! -z "$WP_VERSION" ]] ; then
-      phpunit
-      WP_MULTISITE=1 phpunit
-    fi
-  - |
-    if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
-      phpcs
-    fi
+- |
+  if [[ ! -z "$WP_VERSION" ]] ; then
+    phpunit
+    WP_MULTISITE=1 phpunit
+  fi
+- |
+  if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
+    phpcs
+  fi
+before_deploy:
+- npm run zip
+- ls -la ys-wp-gutenberg-switcher.zip
+- export RELEASE_FILE=$(ls ys-wp-gutenberg-switcher.zip)
+deploy:
+  provider: releases
+  api_key:
+    secure: u4o8710fp6/NLm9odgwV9cDHIEVHCwZuW+QPgA68AKVog6jTKMowFtgRngwKhXN/KxZeGAfJkNxP0DihSw6tBt4e51Gv4sxqIAhsmYcZxWgOVoUiaNm7G0m/1BzuCEdCey7uxwyvu/jMDJ+SNlrx39ehPP6B2aJaGh+o2fFCSk6+wPkKA72pfi2XOBEAwdvL0IX3T9T0Ym0AqQzmyW+Upcvoo4aJziZimei7+gkPg3CwO+gg54lr3ZFk4++edXa8Q2ACjM3EZd4lfmsKEe6PFQqbyByB+ReJDouH758OT0LqQf/xYjsXxdm38nok/LfOriA2ie5nStngemaDQ1N4LujN/lUdpGVvy3wgd7exvB06uKDp1NLUR4VBDJsqk8nFr7fwExiAF1txghzbfRYMpFQKN8pIxvkealxcdj0t/DbhrFcYhCWaGlu+s2NswZG3nhBQ1bpGx8CLMTI+HJCThFo2+wVUkENS2A67GVoo3epnypdpKssFQl9tJLJ5y+y9j7e7ILUTKnkK1gB/S66NvBbUUF/cBJrAIabR/nchMHYnwNBQrM+VlH62O/5U6l2AiX7pawFLXfDm5C3cvkykXv0jEqG1vuXn3b3p3U/mbZh1lRL/nQ3I3JxmdsKSAITtkzPisGQOdD/hkxZQ1O53MrvYV8/MxTvkswregqpH5IM=
+  file: "${RELEASE_FILE}"
+  skip_cleanup: true
+  on:
+    tags: true
+    php: 7.2
+    repo: yosiakatsuki/ys-wp-gutenberg-switcher

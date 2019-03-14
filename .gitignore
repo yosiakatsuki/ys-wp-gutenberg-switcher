@@ -7,3 +7,6 @@ node_modules/
 *.sql
 *.tar.gz
 *.zip
+vendor
+ys-wp-gutenberg-switcher.zip
+ys-wp-gutenberg-switcher/
