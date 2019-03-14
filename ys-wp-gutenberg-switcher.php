@@ -14,8 +14,14 @@
  * @license         GPL-2.0+
  */
 
+/**
+ * Autoload
+ */
 require_once( __DIR__ . '/vendor/autoload.php' );
 
+/**
+ * 定数
+ */
 define( 'YSWPGS_PATH', plugin_dir_path( __FILE__ ) );
 define( 'YSWPGS_USE_BLOCK_META_KEY', '_yswpgs_use_block' );
 
@@ -108,7 +114,7 @@ add_action( 'save_post', 'yswpgs_save_post' );
  * 自動アップデート
  */
 function yswpgs_activate_autoupdate() {
-	$updater = new Inc2734\WP_GitHub_Plugin_Updater\Bootstrap(
+	new Inc2734\WP_GitHub_Plugin_Updater\Bootstrap(
 		plugin_basename( __FILE__ ),
 		'yosiakatsuki',
 		'ys-wp-gutenberg-switcher'
