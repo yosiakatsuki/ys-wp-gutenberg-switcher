@@ -11,6 +11,7 @@
  *
  * @author          yosiakatuki
  * @package         Ys_Wp_Gutenberg_Switcher
+ * @license         GPL-2.0+
  */
 
 require_once( __DIR__ . '/vendor/autoload.php' );
