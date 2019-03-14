@@ -9,6 +9,7 @@ branches:
   only:
   - master
   - develop
+  - "/v\\d+\\.\\d+\\.\\d+?.*/"
 cache:
   directories:
   - "$HOME/.composer/cache"
