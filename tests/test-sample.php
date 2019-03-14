@@ -2,7 +2,7 @@
 /**
  * Class SampleTest
  *
- * @package Aaa
+ * @package ys-wp-gutenberg-switcher
  */
 
 /**
