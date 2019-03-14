@@ -20,5 +20,5 @@ Gutenbergでの編集画面で「Gutenbergを使用する」のチェックを�
 ## Third-party resources
 
 ### WP GitHub Plugin Updater
-License: GPL-2.0+
+License: GPL-2.0+  
 Source : https://github.com/inc2734/wp-github-plugin-updater
