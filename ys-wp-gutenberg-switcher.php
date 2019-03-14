@@ -7,7 +7,7 @@
  * Author URI:      https://yosiakatsuki.net/blog
  * Text Domain:     ys-wp-gutenberg-switcher
  * Domain Path:     /languages
- * Version:         0.2.0
+ * Version:         1.0.0
  *
  * @author          yosiakatuki
  * @package         Ys_Wp_Gutenberg_Switcher
