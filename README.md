@@ -17,5 +17,8 @@ Gutenbergでの編集画面で「Gutenbergを使用する」のチェックを�
 
 機能実装に関する参考記事：https://capitalp.jp/2018/12/08/activate-classic-editor-by-post/
 
-## 今後の予定
-* 一応自動アプデ機能をつけておきたい
+## Third-party resources
+
+### WP GitHub Plugin Updater
+License: GPL-2.0+
+Source : https://github.com/inc2734/wp-github-plugin-updater

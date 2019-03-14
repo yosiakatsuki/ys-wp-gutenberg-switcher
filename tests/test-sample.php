@@ -12,6 +12,7 @@ class SampleTest extends WP_UnitTestCase {
 
 	/**
 	 * A single example test.
+	 * テスト書かなくてスミマセン.
 	 */
 	function test_sample() {
 		// Replace this with some actual testing code.
