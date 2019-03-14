@@ -9,6 +9,7 @@
  * Domain Path:     /languages
  * Version:         0.1.0
  *
+ * @author          yosiakatuki
  * @package         Ys_Wp_Gutenberg_Switcher
  */
 
@@ -71,9 +72,9 @@ function yswpgs_meta_box_html() {
 		$checked = '1';
 	}
 	?>
-    <label for="yswpgs_use_block">
-        <input type="checkbox" id="yswpgs_use_block" name="yswpgs_use_block" value="1" <?php checked( $checked, '1', true ); ?> />Gutenbergを使用する
-    </label>
+	<label for="yswpgs_use_block">
+		<input type="checkbox" id="yswpgs_use_block" name="yswpgs_use_block" value="1" <?php checked( $checked, '1', true ); ?> />Gutenbergを使用する
+	</label>
 	<?php
 }
 
