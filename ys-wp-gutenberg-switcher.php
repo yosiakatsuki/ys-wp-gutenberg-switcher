@@ -60,9 +60,17 @@ add_action( 'admin_menu', 'yswpgs_add_meta_box' );
  * メタボックスの中身
  */
 function yswpgs_meta_box_html() {
+	global $post;
+	$checked = get_post_meta( get_the_ID(), YSWPGS_USE_BLOCK_META_KEY, true );
+	/**
+	 * 新規作成する投稿はGutenbergにする
+	 */
+	if ( '' == $post->post_name ) {
+		$checked = '1';
+	}
 	?>
 	<label for="yswpgs_use_block">
-		<input type="checkbox" id="yswpgs_use_block" name="yswpgs_use_block" value="1" <?php checked( get_post_meta( get_the_ID(), YSWPGS_USE_BLOCK_META_KEY, true ), '1', true ); ?> />Gutenbergを使用する
+		<input type="checkbox" id="yswpgs_use_block" name="yswpgs_use_block" value="1" <?php checked( $checked, '1', true ); ?> />Gutenbergを使用する
 	</label>
 	<?php
 }
