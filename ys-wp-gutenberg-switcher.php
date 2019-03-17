@@ -7,7 +7,7 @@
  * Author URI:      https://yosiakatsuki.net/blog
  * Text Domain:     ys-wp-gutenberg-switcher
  * Domain Path:     /languages
- * Version:         1.0.0
+ * Version:         1.0.1
  *
  * @author          yosiakatuki
  * @package         Ys_Wp_Gutenberg_Switcher
@@ -60,6 +60,13 @@ function yswpgs_add_meta_box() {
 		'Gutenbergの使用設定',
 		'yswpgs_meta_box_html',
 		'post',
+		'advanced'
+	);
+	add_meta_box(
+		'ys-wp-gutenberg-switcher',
+		'Gutenbergの使用設定',
+		'yswpgs_meta_box_html',
+		'page',
 		'advanced'
 	);
 }
